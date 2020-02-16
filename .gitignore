@@ -1,4 +1,9 @@
 bin/
+CMakeFiles/
+
+CMakeCache.txt
+cmake_install.cmake
+Makefile
 
 # Prerequisites
 *.d
