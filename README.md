@@ -1,2 +1,3 @@
 # libnv-portable
-A portable userspace version of libnv.
+
+A cross-platform userspace version of libnv ported from FreeBSD 12.
