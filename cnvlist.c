@@ -32,23 +32,6 @@
 #include <sys/cdefs.h>
 #endif
 
-#ifdef _KERNEL
-
-#include <sys/types.h>
-
-#ifdef __linux__
-#include <bsd/sys/param.h>
-#else
-#include <sys/param.h>
-#endif
-
-#include <sys/kernel.h>
-#include <sys/systm.h>
-#include <sys/malloc.h>
-
-#include <machine/stdarg.h>
-
-#else
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -57,8 +40,6 @@
 #include <bsd/stdlib.h>
 #else
 #include <stdlib.h>
-#endif
-
 #endif
 
 #include "nv.h"
@@ -98,9 +79,7 @@ CNVLIST_GET(bool, bool, BOOL)
 CNVLIST_GET(uint64_t, number, NUMBER)
 CNVLIST_GET(const char *, string, STRING)
 CNVLIST_GET(const nvlist_t *, nvlist, NVLIST)
-#ifndef _KERNEL
 CNVLIST_GET(int, descriptor, DESCRIPTOR)
-#endif
 
 #undef	CNVLIST_GET
 
@@ -120,9 +99,7 @@ CNVLIST_GET_ARRAY(const bool *, bool_array, BOOL_ARRAY)
 CNVLIST_GET_ARRAY(const uint64_t *, number_array, NUMBER_ARRAY)
 CNVLIST_GET_ARRAY(const char * const *, string_array, STRING_ARRAY)
 CNVLIST_GET_ARRAY(const nvlist_t * const *, nvlist_array, NVLIST_ARRAY)
-#ifndef _KERNEL
 CNVLIST_GET_ARRAY(const int *, descriptor_array, DESCRIPTOR_ARRAY)
-#endif
 
 #undef	CNVLIST_GET_ARRAY
 
@@ -157,9 +134,7 @@ CNVLIST_TAKE(bool, bool, BOOL)
 CNVLIST_TAKE(uint64_t, number, NUMBER)
 CNVLIST_TAKE(char *, string, STRING)
 CNVLIST_TAKE(nvlist_t *, nvlist, NVLIST)
-#ifndef _KERNEL
 CNVLIST_TAKE(int, descriptor, DESCRIPTOR)
-#endif
 
 #undef	CNVLIST_TAKE
 
@@ -185,9 +160,7 @@ CNVLIST_TAKE_ARRAY(bool *, bool_array, BOOL_ARRAY)
 CNVLIST_TAKE_ARRAY(uint64_t *, number_array, NUMBER_ARRAY)
 CNVLIST_TAKE_ARRAY(char **, string_array, STRING_ARRAY)
 CNVLIST_TAKE_ARRAY(nvlist_t **, nvlist_array, NVLIST_ARRAY)
-#ifndef _KERNEL
 CNVLIST_TAKE_ARRAY(int *, descriptor_array, DESCRIPTOR_ARRAY);
-#endif
 
 #undef	CNVLIST_TAKE_ARRAY
 
@@ -224,9 +197,7 @@ CNVLIST_FREE(bool_array)
 CNVLIST_FREE(number_array)
 CNVLIST_FREE(string_array)
 CNVLIST_FREE(nvlist_array)
-#ifndef _KERNEL
 CNVLIST_FREE(descriptor)
 CNVLIST_FREE(descriptor_array)
-#endif
 
 #undef	CNVLIST_FREE

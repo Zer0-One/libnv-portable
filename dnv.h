@@ -40,12 +40,10 @@
 #include <sys/cdefs.h>a
 #endif
 
-#ifndef _KERNEL
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#endif
 
 #ifndef	_NVLIST_T_DECLARED
 #define	_NVLIST_T_DECLARED

@@ -51,24 +51,6 @@ typedef struct nvpair nvpair_t;
 #define	NV_FLAG_BIG_ENDIAN		0x080
 #define	NV_FLAG_IN_ARRAY		0x100
 
-#ifdef _KERNEL
-#define	nv_malloc(size)			malloc((size), M_NVLIST, M_WAITOK)
-#define	nv_calloc(n, size)		mallocarray((n), (size), M_NVLIST, \
-					    M_WAITOK | M_ZERO)
-#define	nv_realloc(buf, size)		realloc((buf), (size), M_NVLIST, \
-					    M_WAITOK)
-#define	nv_free(buf)			free((buf), M_NVLIST)
-#define	nv_strdup(buf)			strdup((buf), M_NVLIST)
-#define	nv_vasprintf(ptr, ...)		vasprintf(ptr, M_NVLIST, __VA_ARGS__)
-
-#define	ERRNO_SET(var)			do { } while (0)
-#define	ERRNO_SAVE()			do { do { } while(0)
-#define	ERRNO_RESTORE()			} while (0)
-
-#define	ERRNO_OR_DEFAULT(default)	(default)
-
-#else
-
 #define	nv_malloc(size)			malloc((size))
 #define	nv_calloc(n, size)		calloc((n), (size))
 #define	nv_realloc(buf, size)		realloc((buf), (size))
@@ -86,8 +68,6 @@ typedef struct nvpair nvpair_t;
 					} while (0)
 
 #define	ERRNO_OR_DEFAULT(default)	(errno == 0 ? (default) : errno)
-
-#endif
 
 int	*nvlist_descriptors(const nvlist_t *nvl, size_t *nitemsp);
 size_t	 nvlist_ndescriptors(const nvlist_t *nvl);

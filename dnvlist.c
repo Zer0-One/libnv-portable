@@ -35,23 +35,6 @@
 #include <sys/cdefs.h>
 #endif
 
-#ifdef _KERNEL
-
-#include <sys/types.h>
-
-#ifdef __linux__
-#include <bsd/sys/param.h>
-#else
-#include <sys/param.h>
-#endif
-
-#include <sys/kernel.h>
-#include <sys/systm.h>
-#include <sys/malloc.h>
-
-#include <machine/stdarg.h>
-
-#else
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -60,8 +43,6 @@
 #include <bsd/stdlib.h>
 #else
 #include <stdlib.h>
-#endif
-
 #endif
 
 #include "dnv.h"
@@ -84,9 +65,7 @@ DNVLIST_GET(bool, bool)
 DNVLIST_GET(uint64_t, number)
 DNVLIST_GET(const char *, string)
 DNVLIST_GET(const nvlist_t *, nvlist)
-#ifndef _KERNEL
 DNVLIST_GET(int, descriptor)
-#endif
 
 #undef	DNVLIST_GET
 
@@ -121,9 +100,7 @@ DNVLIST_TAKE(bool, bool)
 DNVLIST_TAKE(uint64_t, number)
 DNVLIST_TAKE(char *, string)
 DNVLIST_TAKE(nvlist_t *, nvlist)
-#ifndef _KERNEL
 DNVLIST_TAKE(int, descriptor)
-#endif
 
 #undef	DNVLIST_TAKE
 

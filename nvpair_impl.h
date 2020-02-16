@@ -41,9 +41,7 @@
 #include <sys/queue.h>
 #endif
 
-#ifndef _KERNEL
 #include <stdint.h>
-#endif
 
 #include "nv.h"
 
