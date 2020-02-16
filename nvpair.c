@@ -30,12 +30,25 @@
  * SUCH DAMAGE.
  */
 
+#ifdef __linux__
+#define __uintptr_t uintptr_t
+#include <stdint.h>
+#include <bsd/sys/cdefs.h>
+#define __unused 
+#else
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+#endif
 
+#ifdef __linux__
+#include <bsd/sys/param.h>
+#include <bsd/sys/endian.h>
+#include <bsd/sys/queue.h>
+#else
 #include <sys/param.h>
 #include <sys/endian.h>
 #include <sys/queue.h>
+#endif
+
 
 #ifdef _KERNEL
 
@@ -52,9 +65,16 @@ __FBSDID("$FreeBSD$");
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
+
+#ifdef __linux__
+#include <bsd/stdlib.h>
+#include <bsd/string.h>
+#include <bsd/unistd.h>
+#else
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#endif
 
 #include "common_impl.h"
 #endif
@@ -63,7 +83,7 @@ __FBSDID("$FreeBSD$");
 #include <pjdlog.h>
 #endif
 
-#include <sys/nv.h>
+#include "nv.h"
 
 #include "nv_impl.h"
 #include "nvlist_impl.h"

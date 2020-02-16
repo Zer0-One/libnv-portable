@@ -29,13 +29,22 @@
  * SUCH DAMAGE.
  */
 
+#ifdef __linux__
+#include <bsd/sys/cdefs.h>
+#else
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+#endif
 
 #ifdef _KERNEL
 
 #include <sys/types.h>
+
+#ifdef __linux__
+#include <bsd/sys/param.h>
+#else
 #include <sys/param.h>
+#endif
+
 #include <sys/kernel.h>
 #include <sys/systm.h>
 #include <sys/malloc.h>
@@ -46,11 +55,17 @@ __FBSDID("$FreeBSD$");
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
+
+#ifdef __linux__
+#include <bsd/stdlib.h>
+#else
 #include <stdlib.h>
 #endif
 
-#include <sys/dnv.h>
-#include <sys/nv.h>
+#endif
+
+#include "dnv.h"
+#include "nv.h"
 
 #include "nv_impl.h"
 

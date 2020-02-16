@@ -24,17 +24,24 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
- *
- * $FreeBSD$
  */
 
+#ifdef __linux__
+#include <bsd/sys/cdefs.h>
+#else
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+#endif
 
 #ifdef _KERNEL
 
 #include <sys/types.h>
+
+#ifdef __linux__
+#include <bsd/sys/param.h>
+#else
 #include <sys/param.h>
+#endif
+
 #include <sys/kernel.h>
 #include <sys/systm.h>
 #include <sys/malloc.h>
@@ -45,11 +52,17 @@ __FBSDID("$FreeBSD$");
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
+
+#ifdef __linux__
+#include <bsd/stdlib.h>
+#else
 #include <stdlib.h>
 #endif
 
-#include <sys/cnv.h>
-#include <sys/nv.h>
+#endif
+
+#include "nv.h"
+#include "cnv.h"
 
 #include "nv_impl.h"
 #include "nvlist_impl.h"

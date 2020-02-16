@@ -35,12 +35,17 @@
 #ifndef	_NVPAIR_IMPL_H_
 #define	_NVPAIR_IMPL_H_
 
-#include <sys/nv.h>
+#ifdef __linux__
+#include <bsd/sys/queue.h>
+#else
 #include <sys/queue.h>
+#endif
 
 #ifndef _KERNEL
 #include <stdint.h>
 #endif
+
+#include "nv.h"
 
 TAILQ_HEAD(nvl_head, nvpair);
 
