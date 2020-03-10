@@ -1,6 +1,7 @@
 /*-
  * SPDX-License-Identifier: BSD-2-Clause-FreeBSD
  *
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2013 The FreeBSD Foundation
  * All rights reserved.
  *
