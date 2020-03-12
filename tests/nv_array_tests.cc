@@ -1,4 +1,5 @@
 /*-
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2015 Mariusz Zaborski <oshogbo@FreeBSD.org>
  * All rights reserved.
  *
@@ -24,12 +25,16 @@
  * SUCH DAMAGE.
  */
 
+#ifdef __linux__
+#include <bsd/sys/cdefs.h>
+#include <bsd/sys/param.h>
+#else
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
-
 #include <sys/param.h>
+#endif
+
 #include <sys/types.h>
-#include <sys/nv.h>
+#include "nv.h"
 #include <sys/socket.h>
 
 #include <atf-c++.hpp>

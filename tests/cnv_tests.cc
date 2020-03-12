@@ -1,4 +1,5 @@
 /*-
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2016 Adam Starak <starak.adam@gmail.com>
  * All rights reserved.
  *
@@ -22,15 +23,16 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
- *
- * $FreeBSD$
  */
 
+#ifdef __linux__
+#include <bsd/sys/cdefs.h>
+#else
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+#endif
 
-#include <sys/cnv.h>
-#include <sys/nv.h>
+#include "cnv.h"
+#include "nv.h"
 #include <sys/types.h>
 
 #include <atf-c++.hpp>

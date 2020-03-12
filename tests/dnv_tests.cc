@@ -1,4 +1,5 @@
 /*-
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2014-2015 Sandvine Inc.  All rights reserved.
  * All rights reserved.
  *
@@ -24,12 +25,15 @@
  * SUCH DAMAGE.
  */
 
+#ifdef __linux__
+#include <bsd/sys/cdefs.h>
+#else
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+#endif
 
 #include <sys/types.h>
-#include <sys/dnv.h>
-#include <sys/nv.h>
+#include "dnv.h"
+#include "nv.h"
 
 #include <atf-c++.hpp>
 

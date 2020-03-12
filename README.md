@@ -2,10 +2,12 @@
 
 A cross-platform userspace version of libnv ported from FreeBSD 12.
 
+To build with tests, run `cmake -DTEST=ON . && make` 
+
 # Dependencies
 
-The only dependency is `libbsd`, which provides those BSD libc includes which
-differ from (or don't exist in) glibc.
+- `libbsd`, which provides those BSD libc includes which differ from (or don't
+  exist in) glibc.
 
 # License
 ```

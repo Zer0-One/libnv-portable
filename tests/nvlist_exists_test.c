@@ -1,4 +1,5 @@
 /*-
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2013 The FreeBSD Foundation
  * All rights reserved.
  *
@@ -25,14 +26,17 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
- *
- * $FreeBSD$
  */
 
-#include <sys/nv.h>
+#include "nv.h"
 
+#ifdef __linux__
+#include <bsd/stdio.h>
+#include <bsd/unistd.h>
+#else
 #include <stdio.h>
 #include <unistd.h>
+#endif
 
 static int ntest = 1;
 
