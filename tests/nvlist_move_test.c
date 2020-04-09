@@ -44,13 +44,17 @@
 #endif
 
 static int ntest = 1;
+static int all_ok = 0;
 
-#define	CHECK(expr)	do {						\
-	if ((expr))							\
-		printf("ok # %d %s:%u\n", ntest, __FILE__, __LINE__);	\
-	else								\
+#define	CHECK(expr)	do {\
+	if ((expr)){\
+		printf("ok # %d %s:%u\n", ntest, __FILE__, __LINE__);\
+    }\
+	else{\
 		printf("not ok # %d %s:%u\n", ntest, __FILE__, __LINE__);\
-	ntest++;							\
+        all_ok++;\
+    }\
+	ntest++;\
 } while (0)
 
 int
@@ -162,6 +166,13 @@ main(void)
 	    "nvlist/binary/abcdefghijklmnopqrstuvwxyz"));
 
 	nvlist_destroy(nvl);
+
+    if(all_ok > 0){
+        printf("%d tests failed\n", all_ok);
+    }
+    else{
+        printf("all ok\n");
+    }
 
 	return (0);
 }

@@ -30,6 +30,7 @@ set_target_properties(nvp
         C_STANDARD 99
         C_STANDARD_REQUIRED TRUE
         C_EXTENSIONS OFF
+        LIBRARY_OUTPUT_DIRECTORY bin
 )
 
 target_compile_definitions(nvp
@@ -48,14 +49,21 @@ function(build_test target)
         $<$<PLATFORM_ID:Linux>:bsd>
     )
 
-    add_test(${target} ${target})
+    set_target_properties(${target}
+        PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY bin/test
+    )
+
+    add_test(NAME ${target} COMMAND ${target} WORKING_DIRECTORY bin/test)
+    set_tests_properties(${target}
+        PROPERTIES
+            PASS_REGULAR_EXPRESSION "all ok"
+    )
 endfunction()
 
 # If tests are enabled, make tests
 if(NVP_TEST)
     enable_testing()
-
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/test)
 
     build_test(nvlist_add_test)
     build_test(nvlist_append_test)
