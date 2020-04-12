@@ -2,7 +2,11 @@
 
 A cross-platform userspace version of libnv ported from FreeBSD 12.
 
-To build with tests, run `cmake -DTEST=ON . && make` 
+libnv is a library that facilitates the creation of lists of name-value pairs,
+and the sending of those lists over sockets.
+
+To build with tests, run `cmake -DNVP_TEST=ON . && make`. To execute tests, run
+`make test`.
 
 # Dependencies
 
