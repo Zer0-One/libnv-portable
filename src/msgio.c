@@ -32,8 +32,11 @@
  */
 
 #include <sys/cdefs.h>
+#include <sys/param.h>
 #include <sys/socket.h>
 #include <sys/select.h>
+#include <sys/types.h>
+#include <sys/un.h>
 
 #include <errno.h>
 #include <fcntl.h>

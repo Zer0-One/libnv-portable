@@ -36,7 +36,7 @@ set_target_properties(nvp
 target_compile_definitions(nvp
     PRIVATE
         _DEFAULT_SOURCE
-        _XOPEN_SOURCE=600
+        $<$<PLATFORM_ID:Linux>:_XOPEN_SOURCE=600>
 )
 
 # If we're on Linux, link against libbsd
