@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14.6)
+cmake_minimum_required(VERSION 3.11)
 
 project(libnv-portable VERSION 1.0.0 DESCRIPTION "A cross-platform userspace version of libnv, ported from FreeBSD")
 
