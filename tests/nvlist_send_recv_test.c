@@ -1,4 +1,5 @@
 /*-
+ * Copyright (c) 2020 David MacKay
  * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2013 The FreeBSD Foundation
  * All rights reserved.
@@ -28,38 +29,24 @@
  * SUCH DAMAGE.
  */
 
-#ifdef __linux__
-#include <bsd/sys/cdefs.h>
-#include <bsd/sys/param.h>
-#else
 #include <sys/cdefs.h>
 #include <sys/param.h>
-#endif
-
 #include <sys/socket.h>
 #include <sys/sysctl.h>
 #include <sys/wait.h>
 #include "nv.h"
 
 #ifdef __linux__
-#include <bsd/stdlib.h>
-#include <bsd/err.h>
-#else
+#include <dirent.h>
+#endif
 #include <stdlib.h>
 #include <err.h>
-#endif
 #include <errno.h>
 #include <fcntl.h>
 #include <paths.h>
-#ifdef __linux__
-#include <bsd/stdio.h>
-#include <bsd/string.h>
-#include <bsd/unistd.h>
-#else
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#endif
 
 #include <atf-c.h>
 
@@ -396,6 +383,21 @@ ATF_TC_BODY(nvlist_send_recv__send_closed_fd, tc)
 static int
 nopenfds(void)
 {
+#ifdef __linux__
+	char fddir_s[PATH_MAX];
+	DIR *fddir;
+	int n;
+
+	n = 0;
+	snprintf(fddir_s, PATH_MAX, "/proc/%i/fd/", getpid());
+	fddir = opendir(fddir_s);
+
+	while (readdir(fddir))
+		n++;
+
+	closedir(fddir);
+	return n;
+#else
 	size_t len;
 	int error, mib[4], n;
 
@@ -409,9 +411,14 @@ nopenfds(void)
 	if (error != 0)
 		return (-1);
 	return (n);
+#endif
 }
 
+#ifdef __linux__
+#define NFDS	253 /* Max sendable with a Unix rights control message */
+#else
 #define	NFDS	512
+#endif
 
 static void
 send_many_fds_child(int sock)

@@ -1,0 +1,6 @@
+syntax(2)
+
+test_suite("libnv-portable")
+
+atf_test_program{name='nvlist_send_recv_test'}
+
