@@ -27,21 +27,12 @@
  * SUCH DAMAGE.
  */
 
-#ifdef __linux__
-#include <bsd/sys/cdefs.h>
-#else
 #include <sys/cdefs.h>
-#endif
 
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
-
-#ifdef __linux__
-#include <bsd/stdlib.h>
-#else
 #include <stdlib.h>
-#endif
 
 #include "nv.h"
 #include "cnv.h"

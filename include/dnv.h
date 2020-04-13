@@ -36,7 +36,7 @@
 #ifdef __linux__
 #include <bsd/sys/cdefs.h>
 #else
-#include <sys/cdefs.h>a
+#include <sys/cdefs.h>
 #endif
 
 #include <stdarg.h>

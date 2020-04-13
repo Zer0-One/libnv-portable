@@ -31,40 +31,27 @@
  * SUCH DAMAGE.
  */
 
-#ifdef __linux__
-#define __uintptr_t uintptr_t
-#include <stdint.h>
-#include <bsd/sys/cdefs.h>
-#define __unused 
-#else
 #include <sys/cdefs.h>
-#endif
 
 #ifdef __linux__
-#include <bsd/sys/param.h>
+#define __uintptr_t uintptr_t
+#define __unused
 #include <bsd/sys/endian.h>
-#include <bsd/sys/queue.h>
 #else
-#include <sys/param.h>
 #include <sys/endian.h>
-#include <sys/queue.h>
 #endif
+
+#include <sys/param.h>
+#include <sys/queue.h>
 
 #include <errno.h>
 #include <fcntl.h>
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
-
-#ifdef __linux__
-#include <bsd/stdlib.h>
-#include <bsd/string.h>
-#include <bsd/unistd.h>
-#else
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#endif
 
 #include "common_impl.h"
 

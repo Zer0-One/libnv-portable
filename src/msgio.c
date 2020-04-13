@@ -31,18 +31,7 @@
  * SUCH DAMAGE.
  */
 
-#ifdef __linux__
-#include <bsd/sys/cdefs.h>
-#else
 #include <sys/cdefs.h>
-#endif
-
-#ifdef __linux__
-#include <bsd/sys/param.h>
-#else
-#include <sys/param.h>
-#endif
-
 #include <sys/socket.h>
 #include <sys/select.h>
 
@@ -50,16 +39,9 @@
 #include <fcntl.h>
 #include <stdbool.h>
 #include <stdint.h>
-
-#ifdef __linux__
-#include <bsd/stdlib.h>
-#include <bsd/string.h>
-#include <bsd/unistd.h>
-#else
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#endif
 
 #ifdef HAVE_PJDLOG
 #include <pjdlog.h>

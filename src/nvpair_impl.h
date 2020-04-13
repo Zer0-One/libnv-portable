@@ -34,11 +34,7 @@
 #ifndef	_NVPAIR_IMPL_H_
 #define	_NVPAIR_IMPL_H_
 
-#ifdef __linux__
-#include <bsd/sys/queue.h>
-#else
 #include <sys/queue.h>
-#endif
 
 #include <stdint.h>
 
