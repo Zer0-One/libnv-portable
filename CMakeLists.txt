@@ -5,6 +5,8 @@ project(libnv-portable VERSION 1.0.0 DESCRIPTION "A cross-platform userspace ver
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
+include(GNUInstallDirs)
+
 # Set options
 option(NVP_TEST "Enable unit tests" OFF)
 option(BUILD_SHARED_LIBS "Build as a shared library" ON)
@@ -27,6 +29,12 @@ add_library(nvp
     src/nvpair.c
 )
 
+set(nvp_includes
+    include/cnv.h
+    include/dnv.h
+    include/nv.h
+)
+
 target_include_directories(nvp
     PUBLIC include
     PRIVATE src
@@ -44,6 +52,7 @@ set_target_properties(nvp
         C_STANDARD_REQUIRED TRUE
         C_EXTENSIONS OFF
         LIBRARY_OUTPUT_DIRECTORY bin
+        PUBLIC_HEADER "${nvp_includes}"
 )
 
 target_compile_definitions(nvp
@@ -54,6 +63,11 @@ target_compile_definitions(nvp
 
 # If we're on Linux, link against libbsd
 target_link_libraries(nvp PUBLIC $<$<PLATFORM_ID:Linux>:bsd>)
+
+install(
+    TARGETS nvp DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
 
 function(build_test target)
     add_executable(${target} tests/${target}.c)
@@ -75,26 +89,25 @@ function(build_test target)
 endfunction()
 
 function(build_atfc_test target)
-    if(TEST_ATF)
-        add_executable(${target} tests/${target}.c)
-        target_link_libraries(${target}
-            Atf-C::Atf-C
-            nvp
-            $<$<PLATFORM_ID:Linux>:bsd>
-        )
+    add_executable(${target} tests/${target}.c)
+    target_link_libraries(${target}
+        Atf-C::Atf-C
+        nvp
+        $<$<PLATFORM_ID:Linux>:bsd>
+    )
 
-        set_target_properties(${target}
-            PROPERTIES
-                RUNTIME_OUTPUT_DIRECTORY bin/test
-        )
+    set_target_properties(${target}
+        PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY bin/test
+    )
 
-        add_test(NAME ${target}
-            COMMAND
-                ${Kyua} test --kyuafile ${CMAKE_CURRENT_SOURCE_DIR}/tests/Kyuafile
-                    --build-root ${CMAKE_CURRENT_BINARY_DIR}/bin/test ${target}
-            WORKING_DIRECTORY
-                bin/test)
-    endif()
+    add_test(NAME ${target}
+        COMMAND
+            ${Kyua} test --kyuafile ${CMAKE_CURRENT_SOURCE_DIR}/tests/Kyuafile
+                --build-root ${CMAKE_CURRENT_BINARY_DIR}/bin/test ${target}
+        WORKING_DIRECTORY
+            bin/test
+    )
 endfunction()
 
 # If tests are enabled, make tests
@@ -108,5 +121,7 @@ if(NVP_TEST)
     build_test(nvlist_get_test)
     build_test(nvlist_move_test)
 
-    build_atfc_test(nvlist_send_recv_test)
+    if(TEST_ATF)
+        build_atfc_test(nvlist_send_recv_test)
+    endif()
 endif()
