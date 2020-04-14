@@ -1,3 +1,4 @@
+
 cmake_minimum_required(VERSION 3.11)
 
 project(libnv-portable VERSION 1.0.0 DESCRIPTION "A cross-platform userspace version of libnv, ported from FreeBSD")
@@ -74,24 +75,26 @@ function(build_test target)
 endfunction()
 
 function(build_atfc_test target)
-    add_executable(${target} tests/${target}.c)
-    target_link_libraries(${target}
-		Atf-C::Atf-C
-        nvp
-        $<$<PLATFORM_ID:Linux>:bsd>
-    )
+    if(TEST_ATF)
+        add_executable(${target} tests/${target}.c)
+        target_link_libraries(${target}
+            Atf-C::Atf-C
+            nvp
+            $<$<PLATFORM_ID:Linux>:bsd>
+        )
 
-    set_target_properties(${target}
-        PROPERTIES
-            RUNTIME_OUTPUT_DIRECTORY bin/test
-    )
+        set_target_properties(${target}
+            PROPERTIES
+                RUNTIME_OUTPUT_DIRECTORY bin/test
+        )
 
-    add_test(NAME ${target}
-		COMMAND
-			${Kyua} test --kyuafile ${CMAKE_CURRENT_SOURCE_DIR}/tests/Kyuafile
-				--build-root ${CMAKE_CURRENT_BINARY_DIR}/bin/test ${target}
-		WORKING_DIRECTORY
-			bin/test)
+        add_test(NAME ${target}
+            COMMAND
+                ${Kyua} test --kyuafile ${CMAKE_CURRENT_SOURCE_DIR}/tests/Kyuafile
+                    --build-root ${CMAKE_CURRENT_BINARY_DIR}/bin/test ${target}
+            WORKING_DIRECTORY
+                bin/test)
+    endif()
 endfunction()
 
 # If tests are enabled, make tests
@@ -105,5 +108,5 @@ if(NVP_TEST)
     build_test(nvlist_get_test)
     build_test(nvlist_move_test)
 
-	build_atfc_test(nvlist_send_recv_test)
+    build_atfc_test(nvlist_send_recv_test)
 endif()
