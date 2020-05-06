@@ -12,14 +12,15 @@ To build with tests, run `cmake -DNVP_TEST=ON . && make`. To execute tests, run
 
 - `libbsd`, which provides those BSD libc includes which differ from (or don't
   exist in) glibc.
+- `atf-c`, `atf-c++`, and `kyua` if you want to build and run the ATF tests.
 
 # License
 ```
 BSD 2-Clause License
 
-Copyright (c) 2020, David Zero <zero-one@zer0-one.net>
 Copyright (c) 2013, The FreeBSD Foundation
 Copyright (c) 2013, Mariusz Zaborski <oshogbo@FreeBSD.org>
+Copyright (c) 2020, David Zero <zero-one@zer0-one.net>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

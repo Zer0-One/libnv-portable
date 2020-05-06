@@ -1,6 +1,6 @@
 /*-
- * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2014-2015 Sandvine Inc.  All rights reserved.
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,6 +34,7 @@
 #include <sys/types.h>
 #include "dnv.h"
 #include "nv.h"
+#include <cstring>
 
 #include <atf-c++.hpp>
 
@@ -395,7 +396,6 @@ ATF_TEST_CASE_BODY(dnvlist_take_string__empty)
 	ATF_REQUIRE_EQ(strcmp(actual_val, default_val), 0);
 
 	free(actual_val);
-	free(default_val);
 	nvlist_destroy(nvl);
 }
 
@@ -413,7 +413,6 @@ ATF_TEST_CASE_BODY(dnvlist_take_string__default_value)
 	ATF_REQUIRE_EQ(strcmp(actual_val, default_val), 0);
 
 	free(actual_val);
-	free(default_val);
 	nvlist_destroy(nvl);
 }
 
@@ -522,7 +521,6 @@ ATF_TEST_CASE_BODY(dnvlist_take_binary__empty)
 	ATF_REQUIRE_EQ(memcmp(actual_val, default_val, actual_size), 0);
 
 	free(actual_val);
-	free(default_val);
 	nvlist_destroy(nvl);
 }
 
@@ -543,7 +541,6 @@ ATF_TEST_CASE_BODY(dnvlist_take_binary__default_value)
 	ATF_REQUIRE_EQ(memcmp(actual_val, default_val, default_size), 0);
 
 	free(actual_val);
-	free(default_val);
 	nvlist_destroy(nvl);
 }
 

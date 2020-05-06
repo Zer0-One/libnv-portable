@@ -1,6 +1,6 @@
 /*-
- * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2015 Mariusz Zaborski <oshogbo@FreeBSD.org>
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,6 +40,7 @@
 #include <atf-c++.hpp>
 
 #include <cstdio>
+#include <cstring>
 #include <errno.h>
 #include <fcntl.h>
 #include <limits>
@@ -48,6 +49,7 @@
 #include <string>
 
 #define fd_is_valid(fd) (fcntl((fd), F_GETFL) != -1 || errno != EBADF)
+#define	nitems(x)	(sizeof((x)) / sizeof((x)[0]))
 
 ATF_TEST_CASE_WITHOUT_HEAD(nvlist_bool_array__basic);
 ATF_TEST_CASE_BODY(nvlist_bool_array__basic)

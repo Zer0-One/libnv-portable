@@ -1,6 +1,6 @@
 /*-
- * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2014-2015 Sandvine Inc.  All rights reserved.
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,6 +35,7 @@
 
 #include <atf-c++.hpp>
 
+#include <cstring>
 #include <errno.h>
 #include <limits>
 #include <set>

@@ -1,6 +1,6 @@
 /*-
- * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2016 Adam Starak <starak.adam@gmail.com>
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,8 +36,10 @@
 #include <sys/types.h>
 
 #include <atf-c++.hpp>
+#include <cstring>
 #include <fcntl.h>
 #include <errno.h>
+
 
 #define	fd_is_valid(fd)	(fcntl((fd), F_GETFL) != -1 || errno != EBADF)
 

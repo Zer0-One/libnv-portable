@@ -1,6 +1,6 @@
 /*-
- * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * Copyright (c) 2013 The FreeBSD Foundation
+ * Copyright (c) 2020 David Zero <zero-one@zer0-one.net>
  * All rights reserved.
  *
  * This software was developed by Pawel Jakub Dawidek under sponsorship from

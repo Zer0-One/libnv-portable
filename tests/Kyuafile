@@ -3,4 +3,8 @@ syntax(2)
 test_suite("libnv-portable")
 
 atf_test_program{name='nvlist_send_recv_test'}
+atf_test_program{name='nv_tests'}
+atf_test_program{name='cnv_tests'}
+atf_test_program{name='dnv_tests'}
+atf_test_program{name='nv_array_tests'}
 

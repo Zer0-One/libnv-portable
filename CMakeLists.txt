@@ -12,9 +12,10 @@ option(NVP_TEST "Enable unit tests" OFF)
 option(BUILD_SHARED_LIBS "Build as a shared library" ON)
 
 find_package(Atf-C)
+find_package(Atf-C++)
 find_program(Kyua kyua)
 
-if(NOT Atf-C_FOUND OR NOT Kyua)
+if(NOT Atf-C_FOUND OR NOT Atf-C++_FOUND OR NOT Kyua)
     message("Will not build ATF tests.")
     set(TEST_ATF FALSE)
 else()
@@ -88,13 +89,22 @@ function(build_test target)
     )
 endfunction()
 
-function(build_atfc_test target)
-    add_executable(${target} tests/${target}.c)
-    target_link_libraries(${target}
-        Atf-C::Atf-C
-        nvp
-        $<$<PLATFORM_ID:Linux>:bsd>
-    )
+function(build_atf_test target atfcpp)
+    if(atfcpp)
+        add_executable(${target} tests/${target}.cc)
+        target_link_libraries(${target}
+            Atf-C++::Atf-C++
+            nvp
+            $<$<PLATFORM_ID:Linux>:bsd>
+        )
+    else()
+        add_executable(${target} tests/${target}.c)
+        target_link_libraries(${target}
+            Atf-C::Atf-C
+            nvp
+            $<$<PLATFORM_ID:Linux>:bsd>
+        )
+    endif()
 
     set_target_properties(${target}
         PROPERTIES
@@ -122,6 +132,10 @@ if(NVP_TEST)
     build_test(nvlist_move_test)
 
     if(TEST_ATF)
-        build_atfc_test(nvlist_send_recv_test)
+        build_atf_test(nvlist_send_recv_test NO)
+        build_atf_test(nv_tests YES)
+        build_atf_test(cnv_tests YES)
+        build_atf_test(dnv_tests YES)
+        build_atf_test(nv_array_tests YES)
     endif()
 endif()
