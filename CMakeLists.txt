@@ -53,6 +53,7 @@ set_target_properties(nvp
         C_STANDARD_REQUIRED TRUE
         C_EXTENSIONS OFF
         LIBRARY_OUTPUT_DIRECTORY bin
+        ARCHIVE_OUTPUT_DIRECTORY bin
         PUBLIC_HEADER "${nvp_includes}"
 )
 
