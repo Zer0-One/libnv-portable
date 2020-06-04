@@ -5,14 +5,20 @@ A cross-platform userspace version of libnv ported from FreeBSD 12.
 libnv is a library that facilitates the creation of lists of name-value pairs,
 and the sending of those lists over sockets.
 
-To build with tests, run `cmake -DNVP_TEST=ON . && make`. To execute tests, run
-`make test`.
 
 # Dependencies
 
 - `libbsd`, which provides those BSD libc includes which differ from (or don't
   exist in) glibc.
 - `atf-c`, `atf-c++`, and `kyua` if you want to build and run the ATF tests.
+
+
+# Building
+
+- The default install prefix is /usr/local . For a different prefix, set `-DCMAKE_INSTALL_PREFIX=/new/prefix`
+- To build with tests, set `-DNVP_TEST=ON`
+- To make, run `make`, to execute tests, run `make test` and to install, run `make install`
+
 
 # License
 ```

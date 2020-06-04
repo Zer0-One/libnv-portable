@@ -1,0 +1,11 @@
+prefix=@DEST_DIR@
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libnvp
+Description: A cross-platform userspace version of libnv ported from FreeBSD 12.
+Version: 1.0
+
+Libs: -L${libdir} -lnvp
+Cflags: -I${includedir}

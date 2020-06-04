@@ -66,10 +66,9 @@ target_compile_definitions(nvp
 # If we're on Linux, link against libbsd
 target_link_libraries(nvp PUBLIC $<$<PLATFORM_ID:Linux>:bsd>)
 
-install(
-    TARGETS nvp DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
+# Generate pkg-config file
+set(DEST_DIR ${CMAKE_INSTALL_PREFIX})
+configure_file(nvp.pc.in bin/nvp.pc @ONLY)
 
 function(build_test target)
     add_executable(${target} tests/${target}.c)
@@ -140,3 +139,13 @@ if(NVP_TEST)
         build_atf_test(nv_array_tests YES)
     endif()
 endif()
+
+install(
+    TARGETS nvp DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/bin/nvp.pc
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+)
