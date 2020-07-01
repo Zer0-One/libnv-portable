@@ -60,7 +60,7 @@ set_target_properties(nvp
 target_compile_definitions(nvp
     PRIVATE
         _DEFAULT_SOURCE
-        $<$<PLATFORM_ID:Linux>:_XOPEN_SOURCE=600>
+        $<$<PLATFORM_ID:Linux>:_GNU_SOURCE>
 )
 
 # If we're on Linux, link against libbsd
@@ -110,14 +110,6 @@ function(build_atf_test target atfcpp)
         PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY bin/test
     )
-
-    add_test(NAME ${target}
-        COMMAND
-            ${Kyua} test --kyuafile ${CMAKE_CURRENT_SOURCE_DIR}/tests/Kyuafile
-                --build-root ${CMAKE_CURRENT_BINARY_DIR}/bin/test ${target}
-        WORKING_DIRECTORY
-            bin/test
-    )
 endfunction()
 
 # If tests are enabled, make tests
@@ -137,6 +129,14 @@ if(NVP_TEST)
         build_atf_test(cnv_tests YES)
         build_atf_test(dnv_tests YES)
         build_atf_test(nv_array_tests YES)
+
+        add_test(NAME atf_tests
+            COMMAND
+                ${Kyua} --loglevel debug test --kyuafile ${CMAKE_CURRENT_SOURCE_DIR}/tests/Kyuafile
+                    --build-root ${CMAKE_CURRENT_BINARY_DIR}/bin/test
+            WORKING_DIRECTORY
+                bin/test
+        )
     endif()
 endif()
 
