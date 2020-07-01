@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.11)
 
-project(libnv-portable VERSION 1.0.0 DESCRIPTION "A cross-platform userspace version of libnv, ported from FreeBSD")
+project(libnv-portable VERSION 1.0.1 DESCRIPTION "A cross-platform userspace version of libnv, ported from FreeBSD")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
